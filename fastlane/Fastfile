@@ -1,0 +1,45 @@
+default_platform(:ios)
+
+BUILD_DIR = "build"
+LOG_DIR = "./build/logs"
+REPORTS_DIR = "./build/reports"
+CONFIG_TEST_DEVICES = ['iPhone 11']
+
+platform :ios do
+	desc "Tests: Performs tests"
+    private_lane :do_tests do |options|
+      run_tests(
+        scheme: options[:scheme],
+        # devices: CONFIG_TEST_DEVICES,
+        skip_detect_devices: false,
+        reset_simulator: true,
+        code_coverage: true,
+        output_directory: "#{REPORTS_DIR}/tests",
+        output_types: "html,junit", # html, junit
+        derived_data_path: BUILD_DIR,
+        output_files: "UnitTest.html, UnitTest.xml",
+        skip_build: true,
+        number_of_retries: 2
+      )
+    end
+
+    desc "Code coverage: Gets code coverage"
+    private_lane :do_coverage do |options|
+      sh "rm -rf ../build/reports/coverage"
+
+      xcov(
+        scheme: options[:scheme],
+        output_directory: "#{REPORTS_DIR}/coverage",
+        minimum_coverage_percentage: 60.0,
+        html_report: true,
+        disable_coveralls: true
+      )
+    end
+
+  	desc "Testing: Build and Runs the Unit tests of the app"
+    lane :tests do |options|
+      scheme = "bitrise-sample"
+      do_tests(scheme: scheme)
+      do_coverage(scheme: scheme)
+    end  
+end
