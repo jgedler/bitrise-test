@@ -13,10 +13,12 @@ final class HomeViewModelTests: XCTestCase {
     }
 
     func test_updateUserName_shouldUpdateUserNameValue() throws {
-
+        // Given
+        // When
+        // Then
     }
 
     func test_updatePassword_shouuldUpdatePasswordValue() {
-        
+
     }
 }
