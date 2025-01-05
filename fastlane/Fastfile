@@ -32,6 +32,8 @@ platform :ios do
         output_directory: "#{REPORTS_DIR}/coverage",
         minimum_coverage_percentage: 60.0,
         html_report: true,
+        json_report: true,
+        markdown_report: true,
         disable_coveralls: true
       )
     end
