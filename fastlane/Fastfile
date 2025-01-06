@@ -17,7 +17,7 @@ platform :ios do
         output_directory: "#{REPORTS_DIR}/tests",
         output_types: "html,junit", # html, junit
         derived_data_path: BUILD_DIR,
-        # result_bundle: true,
+        result_bundle: true,
         output_files: "UnitTest.html, UnitTest.xml",
         skip_build: true,
         number_of_retries: 2
@@ -38,7 +38,7 @@ platform :ios do
         disable_coveralls: true
       )
 
-      sh("mv .#{REPORTS_DIR}/coverage/report.md .#{REPORTS_DIR}/tests/")
+      # sh("mv .#{REPORTS_DIR}/coverage/report.md .#{REPORTS_DIR}/tests/")
     end
 
   	desc "Testing: Build and Runs the Unit tests of the app"
