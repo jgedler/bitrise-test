@@ -37,8 +37,6 @@ platform :ios do
         markdown_report: true,
         disable_coveralls: true
       )
-
-      # sh("mv .#{REPORTS_DIR}/coverage/report.md .#{REPORTS_DIR}/tests/")
     end
 
   	desc "Testing: Build and Runs the Unit tests of the app"
