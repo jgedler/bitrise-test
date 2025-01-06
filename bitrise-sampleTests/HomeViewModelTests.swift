@@ -14,6 +14,7 @@ final class HomeViewModelTests: XCTestCase {
 
     func test_updateUserName_shouldUpdateUserNameValue() throws {
         // Given
+        let value = "username"
         // When
         // Then
     }
