@@ -45,6 +45,7 @@ platform :ios do
       scheme = "bitrise-sample"
       do_tests(scheme: scheme)
       # do_coverage(scheme: scheme)
+      
       perform_danger
     end
 
