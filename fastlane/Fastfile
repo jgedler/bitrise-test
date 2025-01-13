@@ -46,19 +46,6 @@ platform :ios do
     lane :tests do |options|
       scheme = "bitrise-sample"
       do_tests(scheme: scheme)
-      # do_coverage(scheme: scheme)
-      perform_danger
-    end
-
-    lane :perform_danger do
-      danger(
-        # danger_id: "unit-tests",
-        # dangerfile: "Dangerfile",
-        github_api_token: DANGER_GITHUB_API_TOKEN,
-        # remove_previous_comments: true,
-        # pr: "https://github.com/jgedler/firebase-distribution/pull/1",
-        verbose: true
-        # fail_on_errors: true
-      )
+      do_coverage(scheme: scheme)
     end
 end
