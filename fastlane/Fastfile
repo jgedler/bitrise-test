@@ -39,11 +39,18 @@ platform :ios do
         disable_coveralls: true
       )
 
-      comment_github_issue(
-        repository_name: 'jgedler/bitrise-test',
-        api_token: GITHUB_API_TOKEN,
-        issue_number: ENV['BITRISE_PULL_REQUEST'],
-        comment: ""
+      # Leer el archivo markdown generado
+      markdown_content = File.read("#{REPORTS_DIR}/coverage/report.md")
+
+      # Asegúrate de que el contenido no sea demasiado grande para el comentario
+      # GitHub tiene un límite de 65536 caracteres por comentario
+      markdown_content = markdown_content[0..65535] if markdown_content.length > 65536
+
+      comment_on_pull_request(
+        github_token: GITHUB_API_TOKEN,
+        repo: 'jgedler/bitrise-test',
+        pr_number: ENV['BITRISE_PULL_REQUEST'],
+        comment: markdown_content
       )
     end
 
