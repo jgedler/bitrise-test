@@ -37,7 +37,7 @@ module Fastlane
                                        type: String),
           FastlaneCore::ConfigItem.new(key: :pr_number,
                                        description: "Número del Pull Request al que agregar el comentario",
-                                       type: Integer),
+                                       type: String),
           FastlaneCore::ConfigItem.new(key: :comment,
                                        description: "Comentario a agregar al Pull Request",
                                        type: String)
