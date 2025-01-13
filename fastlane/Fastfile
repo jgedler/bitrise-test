@@ -40,7 +40,7 @@ platform :ios do
       )
 
       comment_github_issue(
-        repository_name: 'yaperos/yape-ios',
+        repository_name: 'jgedler/bitrise-test',
         api_token: GITHUB_API_TOKEN,
         issue_number: ENV['BITRISE_PULL_REQUEST'],
         comment: ""
