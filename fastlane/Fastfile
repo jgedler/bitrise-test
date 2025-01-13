@@ -40,7 +40,7 @@ platform :ios do
       )
 
       # Leer el archivo markdown generado
-      markdown_content = File.read("#{REPORTS_DIR}/coverage/report.md")
+      markdown_content = File.read(".#{REPORTS_DIR}/coverage/report.md")
 
       # Asegúrate de que el contenido no sea demasiado grande para el comentario
       # GitHub tiene un límite de 65536 caracteres por comentario
