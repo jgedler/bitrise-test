@@ -4,6 +4,7 @@ BUILD_DIR = "build"
 LOG_DIR = "./build/logs"
 REPORTS_DIR = "./build/reports"
 CONFIG_TEST_DEVICES = ['iPhone 11']
+GITHUB_API_TOKEN = ENV['GITHUB_API_TOKEN']
 
 platform :ios do
 	desc "Tests: Performs tests"
@@ -38,7 +39,12 @@ platform :ios do
         disable_coveralls: true
       )
 
-      # sh("mv .#{REPORTS_DIR}/coverage/report.md .#{REPORTS_DIR}/tests/")
+      comment_github_issue(
+        repository_name: 'yaperos/yape-ios',
+        api_token: GITHUB_API_TOKEN,
+        issue_number: ENV['BITRISE_PULL_REQUEST'],
+        comment: ""
+      )
     end
 
   	desc "Testing: Build and Runs the Unit tests of the app"
