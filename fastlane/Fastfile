@@ -55,7 +55,7 @@ platform :ios do
         # dangerfile: "Dangerfile",
         github_api_token: DANGER_GITHUB_API_TOKEN,
         # remove_previous_comments: true,
-        # pr: "https://github.com/jgedler/firebase-distribution/pull/1",
+        pr: 'https://github.com/jgedler/bitrise-sample/pull/3',
         verbose: true
         # fail_on_errors: true
       )
