@@ -1,0 +1,35 @@
+---
+name: Check Pull Request
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+# Ensures that only one deploy task per branch/environment will run at a time.
+concurrency:
+  group: action-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  coverage_report:
+    name: Coverage report
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+
+      - name: Install dependencies from Gemfile
+        run: |
+          gem install bundler
+          bundle install  # Instalar todas las dependencias del Gemfile
+
+      - name: Run tests and generate coverage report
+        run: |
+          fastlane tests  # Asegúrate de tener configurada esta lane en tu Fastfile
+        env:
+          GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Usar el token de GitHub para interactuar con la API
