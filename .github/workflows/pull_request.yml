@@ -31,5 +31,9 @@ jobs:
       - name: Run tests and generate coverage report
         run: |
           fastlane tests  # Asegúrate de tener configurada esta lane en tu Fastfile
+          
+      - name: Run Danger
+        run: |
+          bundle exec danger  # Ejecutar Danger usando Bundler
         env:
-          GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Usar el token de GitHub para interactuar con la API
+          DANGER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Usar el token de GitHub para interactuar con la API
