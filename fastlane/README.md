@@ -23,6 +23,14 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 Testing: Build and Runs the Unit tests of the app
 
+### ios perform_danger
+
+```sh
+[bundle exec] fastlane ios perform_danger
+```
+
+
+
 ----
 
 This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.
