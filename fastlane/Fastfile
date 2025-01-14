@@ -46,17 +46,15 @@ platform :ios do
       do_tests(scheme: scheme)
       # do_coverage(scheme: scheme)
       
-      perform_danger
+      # perform_danger
     end
 
     lane :perform_danger do
       sh "rm -rf ../build/reports/coverage"
       danger(
-        # danger_id: "unit-tests",
-        # dangerfile: "Dangerfile",
         github_api_token: GITHUB_API_TOKEN,
         # remove_previous_comments: true,
-        # pr: "https://github.com/jgedler/bitrise-test/pull/3",
+        pr: "https://github.com/jgedler/bitrise-test/pull/8",
         verbose: true
         # fail_on_errors: true
       )
