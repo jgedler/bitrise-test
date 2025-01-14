@@ -37,6 +37,7 @@ fail("Big PR (files changed: #{files_changed} and max allowed is 7)") if files_c
 xcov.report(
 	scheme: 'bitrise-sample',
 	output_directory: "build/reports/coverage",
+	xccov_file_direct_path: "build/reports/tests/bitrise-sample.xcresult",
 	minimum_coverage_percentage: 60.0,
 	html_report: true,
 	json_report: true,
