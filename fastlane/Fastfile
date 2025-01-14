@@ -4,7 +4,7 @@ BUILD_DIR = "build"
 LOG_DIR = "./build/logs"
 REPORTS_DIR = "./build/reports"
 CONFIG_TEST_DEVICES = ['iPhone 11']
-DANGER_GITHUB_API_TOKEN = ENV['DANGER_GITHUB_API_TOKEN']
+GITHUB_API_TOKEN = ENV['GITHUB_API_TOKEN']
 
 platform :ios do
 	desc "Tests: Performs tests"
@@ -50,12 +50,13 @@ platform :ios do
     end
 
     lane :perform_danger do
+      sh "rm -rf ../build/reports/coverage"
       danger(
         # danger_id: "unit-tests",
         # dangerfile: "Dangerfile",
-        github_api_token: DANGER_GITHUB_API_TOKEN,
+        github_api_token: GITHUB_API_TOKEN,
         # remove_previous_comments: true,
-        pr: 'https://github.com/jgedler/bitrise-sample/pull/3',
+        # pr: "https://github.com/jgedler/bitrise-test/pull/3",
         verbose: true
         # fail_on_errors: true
       )

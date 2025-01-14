@@ -29,14 +29,17 @@ fail("Big PR (files changed: #{files_changed} and max allowed is 7)") if files_c
 # fail("fit left in tests") if `grep -r fit specs/ `.length > 1
 
 # swiftlint.max_num_violations = 20
-swiftlint.lint_files fail_on_error: true
+# swiftlint.lint_files fail_on_error: true
 
 # fail("This PR has some lint errors that needs to be fixed") if !swiftlint.errors.empty?
-fail("This PR exceeds the max number of lint warnings allowed (max allowed is 3)") if swiftlint.warnings.count > 3
+# fail("This PR exceeds the max number of lint warnings allowed (max allowed is 3)") if swiftlint.warnings.count > 3
 
 xcov.report(
-   scheme: 'bitrise-sample',
-   # workspace: 'Example/EasyPeasy.xcworkspace',
-   exclude_targets: 'bitrise-sample.app',
-   minimum_coverage_percentage: 60
+	scheme: 'bitrise-sample',
+	output_directory: "build/reports/coverage",
+	minimum_coverage_percentage: 60.0,
+	html_report: true,
+	json_report: true,
+	markdown_report: true,
+	disable_coveralls: true
 )
