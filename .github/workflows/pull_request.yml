@@ -32,4 +32,5 @@ jobs:
         run: |
           fastlane tests  # Asegúrate de tener configurada esta lane en tu Fastfile
         env:
-          GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Usar el token de GitHub para interactuar con la API
+          GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.number }}  # Usar el token de GitHub para interactuar con la API
