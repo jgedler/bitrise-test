@@ -4,6 +4,7 @@ BUILD_DIR = "build"
 LOG_DIR = "./build/logs"
 REPORTS_DIR = "./build/reports"
 CONFIG_TEST_DEVICES = ['iPhone 11']
+GITHUB_API_TOKEN = ENV['GITHUB_API_TOKEN']
 
 platform :ios do
 	desc "Tests: Performs tests"
@@ -17,6 +18,7 @@ platform :ios do
         output_directory: "#{REPORTS_DIR}/tests",
         output_types: "html,junit", # html, junit
         derived_data_path: BUILD_DIR,
+        result_bundle: true,
         output_files: "UnitTest.html, UnitTest.xml",
         skip_build: true,
         number_of_retries: 2
@@ -32,6 +34,8 @@ platform :ios do
         output_directory: "#{REPORTS_DIR}/coverage",
         minimum_coverage_percentage: 60.0,
         html_report: true,
+        json_report: true,
+        markdown_report: true,
         disable_coveralls: true
       )
     end
@@ -40,6 +44,19 @@ platform :ios do
     lane :tests do |options|
       scheme = "bitrise-sample"
       do_tests(scheme: scheme)
-      do_coverage(scheme: scheme)
-    end  
+      # do_coverage(scheme: scheme)
+      
+      # perform_danger
+    end
+
+    lane :perform_danger do
+      sh "rm -rf ../build/reports/coverage"
+      danger(
+        github_api_token: GITHUB_API_TOKEN,
+        # remove_previous_comments: true,
+        pr: "https://github.com/jgedler/bitrise-test/pull/8",
+        verbose: true
+        # fail_on_errors: true
+      )
+    end
 end
