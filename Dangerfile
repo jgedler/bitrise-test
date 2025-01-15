@@ -38,7 +38,7 @@ xcov.report(
 	scheme: 'bitrise-sample',
 	output_directory: "build/reports/coverage",
 	xccov_file_direct_path: "build/reports/tests/bitrise-sample.xcresult",
-	minimum_coverage_percentage: 60.0,
+	minimum_coverage_percentage: 75.0,
 	html_report: true,
 	json_report: true,
 	markdown_report: true,
