@@ -49,7 +49,7 @@ platform :ios do
       comment_on_pull_request(
         github_token: GITHUB_API_TOKEN,
         repo: 'jgedler/bitrise-test',
-        pr_number: ENV['BITRISE_PULL_REQUEST'],
+        pr_number: ENV['PR_NUMBER'],
         comment: markdown_content
       )
     end
