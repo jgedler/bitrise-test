@@ -4,6 +4,7 @@ BUILD_DIR = "build"
 LOG_DIR = "./build/logs"
 REPORTS_DIR = "./build/reports"
 CONFIG_TEST_DEVICES = ['iPhone 11']
+GITHUB_API_TOKEN = ENV['GITHUB_API_TOKEN']
 
 platform :ios do
 	desc "Tests: Performs tests"
@@ -17,6 +18,7 @@ platform :ios do
         output_directory: "#{REPORTS_DIR}/tests",
         output_types: "html,junit", # html, junit
         derived_data_path: BUILD_DIR,
+        result_bundle: true,
         output_files: "UnitTest.html, UnitTest.xml",
         skip_build: true,
         number_of_retries: 2
@@ -32,7 +34,23 @@ platform :ios do
         output_directory: "#{REPORTS_DIR}/coverage",
         minimum_coverage_percentage: 60.0,
         html_report: true,
+        json_report: true,
+        markdown_report: true,
         disable_coveralls: true
+      )
+
+      # Leer el archivo markdown generado
+      markdown_content = File.read(".#{REPORTS_DIR}/coverage/report.md")
+
+      # Asegúrate de que el contenido no sea demasiado grande para el comentario
+      # GitHub tiene un límite de 65536 caracteres por comentario
+      markdown_content = markdown_content[0..65535] if markdown_content.length > 65536
+
+      comment_on_pull_request(
+        github_token: GITHUB_API_TOKEN,
+        repo: 'jgedler/bitrise-test',
+        pr_number: ENV['BITRISE_PULL_REQUEST'],
+        comment: markdown_content
       )
     end
 
