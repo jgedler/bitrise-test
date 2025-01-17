@@ -35,5 +35,11 @@ jobs:
       - name: Create coverage report summary
         if: success()
         run: |
-          echo "Coverage report"
-          echo "$(<build/reports/coverage/report.md) >> GITHUB_STEP_SUMMARY
+          REPORT_PATH="build/reports/coverage/report.md"
+          if [ -f "$REPORT_PATH" ]; then
+            echo "Coverage report"
+            echo "$(<build/reports/coverage/report.md) >> GITHUB_STEP_SUMMARY
+          else
+            echo "Coverage report not found at $REPORT_PATH"
+            exit 1
+          fi
