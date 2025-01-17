@@ -37,9 +37,9 @@ jobs:
         run: |
           REPORT_PATH="build/reports/coverage/report.md"
           if [ -f "$REPORT_PATH" ]; then
-            echo "Coverage report"
+            # echo "Coverage report"
             cat build/reports/coverage/report.md >> GITHUB_STEP_SUMMARY
           else
-            echo "Coverage report not found at $REPORT_PATH"
+            echo "Coverage report not found at $REPORT_PATH" >> GITHUB_STEP_SUMMARY
             exit 1
           fi
