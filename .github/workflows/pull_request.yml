@@ -33,13 +33,13 @@ jobs:
           fastlane tests  # Asegúrate de tener configurada esta lane en tu Fastfile
           
       - name: Create coverage report summary
-        if: success()
+        # if: success()
         run: |
           REPORT_PATH="build/reports/coverage/report.md"
           if [ -f "$REPORT_PATH" ]; then
             # echo "Coverage report"
-            cat build/reports/coverage/report.md >> GITHUB_STEP_SUMMARY
+            cat build/reports/coverage/report.md >> $GITHUB_STEP_SUMMARY
           else
-            echo "Coverage report not found at $REPORT_PATH" >> GITHUB_STEP_SUMMARY
+            echo "Coverage report not found at $REPORT_PATH" >> $GITHUB_STEP_SUMMARY
             exit 1
           fi
