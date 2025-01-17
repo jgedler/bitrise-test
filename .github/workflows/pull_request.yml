@@ -35,8 +35,5 @@ jobs:
       - name: Create coverage report summary
         if: success()
         run: |
-          echo "Adding coverage report to job summary"
-          echo '```markdown' > summary.md
-          cat build/reports/coverage/report.md >> summary.md
-          echo '```' >> summary.md
-          cat summary.md | sed 's/%/%25/g; s/\n/%0A/g; s/\r/%0D/g' | awk '{print "::add-job-summary::" $0}'
+          echo "Coverage report"
+          echo "$(<build/reports/coverage/report.md) >> GITHUB_STEP_SUMMARY
